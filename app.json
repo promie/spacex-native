@@ -2,6 +2,7 @@
   "expo": {
     "name": "spacex-native",
     "slug": "spacex-native",
+    "scheme": "spacexnative",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
