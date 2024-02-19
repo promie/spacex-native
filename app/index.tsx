@@ -38,13 +38,27 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
-      {isLoading && <ActivityIndicator style={styles.loadingIndication} />}
-      <FlashList
-        data={data}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-        estimatedItemSize={100}
-      />
+      {isLoading ? (
+        <ActivityIndicator style={styles.loadingIndication} />
+      ) : (
+        <View style={styles.container}>
+          <View
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Image source={require('../assets/logo.png')} style={styles.logo} />
+          </View>
+          <FlashList
+            data={data}
+            renderItem={renderItem}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+            estimatedItemSize={100}
+          />
+        </View>
+      )}
     </View>
   )
 }
@@ -52,6 +66,7 @@ const Page = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   loadingIndication: {
     marginTop: 15,
@@ -80,6 +95,10 @@ const styles = StyleSheet.create({
     maxWidth: 50,
     maxHeight: 50,
     marginRight: 20,
+  },
+  logo: {
+    width: 300,
+    height: 100,
   },
 })
 
