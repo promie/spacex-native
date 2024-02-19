@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query'
 import { FlashList, ListRenderItem } from '@shopify/flash-list'
 import { Ionicons } from '@expo/vector-icons'
 import { getLaunches } from '@api/launches'
+import Logo from '@components/Logo'
 
 const Page = () => {
   const query = useQuery({
@@ -38,13 +39,19 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
-      {isLoading && <ActivityIndicator style={styles.loadingIndication} />}
-      <FlashList
-        data={data}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-        estimatedItemSize={100}
-      />
+      {isLoading ? (
+        <ActivityIndicator style={styles.loadingIndication} />
+      ) : (
+        <View style={styles.container}>
+          <Logo />
+          <FlashList
+            data={data}
+            renderItem={renderItem}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+            estimatedItemSize={100}
+          />
+        </View>
+      )}
     </View>
   )
 }
@@ -52,6 +59,7 @@ const Page = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   loadingIndication: {
     marginTop: 15,
@@ -80,6 +88,10 @@ const styles = StyleSheet.create({
     maxWidth: 50,
     maxHeight: 50,
     marginRight: 20,
+  },
+  logo: {
+    width: 300,
+    height: 100,
   },
 })
 
