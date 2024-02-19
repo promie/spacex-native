@@ -1,18 +1,12 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
-} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Link } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
 import { FlashList, ListRenderItem } from '@shopify/flash-list'
 import { Ionicons } from '@expo/vector-icons'
 import { getLaunches } from '@api/launches'
 import Logo from '@components/Logo'
+import LoadingIndicator from '@components/LoadingIndicator'
 
 const Page = () => {
   const query = useQuery({
@@ -40,7 +34,7 @@ const Page = () => {
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator style={styles.loadingIndication} />
+        <LoadingIndicator />
       ) : (
         <View style={styles.container}>
           <Logo />
@@ -60,9 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
-  },
-  loadingIndication: {
-    marginTop: 15,
   },
   item: {
     padding: 10,

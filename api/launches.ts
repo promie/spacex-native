@@ -7,6 +7,8 @@ const getLaunches = async () => {
 }
 
 const getFlightDetails = async (flightNumber: string) => {
+  await delay(200 + Math.floor(Math.random() * 2000))
+
   const response = await fetch(
     `https://api.spacexdata.com/v3/launches/${flightNumber}`,
   )
@@ -20,4 +22,4 @@ const delay = (t: number) => {
   })
 }
 
-export { getLaunches }
+export { getLaunches, getFlightDetails }
