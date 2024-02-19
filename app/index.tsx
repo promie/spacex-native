@@ -1,6 +1,15 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+} from 'react-native'
+import { Link } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
+import { FlashList, ListRenderItem } from '@shopify/flash-list'
 import { getLaunches } from '@api/launches'
 
 const Page = () => {
@@ -11,13 +20,26 @@ const Page = () => {
 
   const { data, isLoading } = query
 
-  console.log('isLoading', isLoading)
-  console.log('data', data)
+  const renderItem: ListRenderItem<any> = ({ item, index }) => (
+    <Link key={index} href={`/(launch)/${item.id}`} asChild>
+      <TouchableOpacity></TouchableOpacity>
+    </Link>
+  )
 
   return (
-    <View>
-      <Text>Welcome to SpaceX</Text>
+    <View style={styles.container}>
+      {isLoading && <ActivityIndicator style={styles.loadingIndication} />}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  loadingIndication: {
+    minHeight: '100%',
+  },
+})
+
 export default Page
