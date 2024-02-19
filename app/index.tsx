@@ -42,7 +42,7 @@ const Page = () => {
       <FlashList
         data={data}
         renderItem={renderItem}
-        ItemSeparatorComponent={() => <View />}
+        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         estimatedItemSize={100}
       />
     </View>
@@ -65,12 +65,21 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 18,
+    fontWeight: 'bold',
     textTransform: 'capitalize',
     flex: 1,
   },
+  itemSeparator: {
+    height: 1,
+    width: '100%',
+    backgroundColor: '#DFDFDF',
+  },
   preview: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
+    maxWidth: 50,
+    maxHeight: 50,
+    marginRight: 20,
   },
 })
 
