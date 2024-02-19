@@ -23,7 +23,7 @@ const Page = () => {
   const { data, isLoading } = query
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => (
-    <Link key={index} href={`/(launch)/${item.flight_number}`} asChild>
+    <Link key={index} href={`/(flight)/${item.flight_number}`} asChild>
       <TouchableOpacity>
         <View style={styles.item}>
           <Image
