@@ -27,10 +27,10 @@ const Page = () => {
       <TouchableOpacity>
         <View style={styles.item}>
           <Image
-            source={{ uri: item.links.patch.small }}
+            source={{ uri: item.links.mission_patch_small }}
             style={styles.preview}
           />
-          <Text style={styles.itemText}>{item.name}</Text>
+          <Text style={styles.itemText}>{item.mission_name}</Text>
           <Ionicons name="chevron-forward" size={24} color="black" />
         </View>
       </TouchableOpacity>
