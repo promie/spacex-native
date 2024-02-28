@@ -15,8 +15,6 @@ const Page = () => {
 
   const { isLoading, data } = flightDetailsQuery
 
-  console.log('data', data)
-
   return (
     <View>
       {isLoading ? (
