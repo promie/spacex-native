@@ -60,6 +60,9 @@ const Page = () => {
     )
     setIsFavourite(!isFavourite)
   }
+
+  console.log('data', data)
+
   return (
     <View>
       {isLoading ? (
@@ -75,9 +78,19 @@ const Page = () => {
               <Text style={styles.title}>{data.mission_name}</Text>
             </View>
 
-            <View>
-              <Text>{data.details}</Text>
-            </View>
+            {data?.details && (
+              <View
+                style={{
+                  marginTop: 20,
+                  alignItems: 'center',
+                  padding: 15,
+                  borderWidth: 1,
+                  borderColor: '#c4b9b9',
+                }}
+              >
+                <Text style={{ fontSize: 16 }}>{data.details}</Text>
+              </View>
+            )}
           </View>
         </>
       )}
