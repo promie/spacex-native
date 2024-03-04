@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
+import { format } from 'date-fns'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useQuery } from '@tanstack/react-query'
 import { Ionicons } from '@expo/vector-icons'
@@ -91,6 +92,40 @@ const Page = () => {
                 <Text style={{ fontSize: 16 }}>{data.details}</Text>
               </View>
             )}
+
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                marginTop: 20,
+              }}
+            >
+              <View>
+                <View style={{ alignItems: 'center' }}>
+                  <Ionicons name={'airplane'} size={24} color="#245086" />
+                </View>
+
+                <View style={{ marginTop: 10 }}>
+                  <Text style={{ fontWeight: 'bold' }}>Launch Date</Text>
+                  <Text>
+                    {data?.launch_date_utc &&
+                      format(data?.launch_date_utc, 'dd MMM yyyy')}
+                  </Text>
+                </View>
+              </View>
+
+              <View>
+                <View style={{ alignItems: 'center' }}>
+                  <Ionicons name={'home'} size={24} color="#245086" />
+                </View>
+
+                <View style={{ marginTop: 10 }}>
+                  <Text style={{ fontWeight: 'bold' }}>Launch Site</Text>
+                  <Text>{data?.launch_site.site_name}</Text>
+                </View>
+              </View>
+            </View>
           </View>
         </>
       )}
