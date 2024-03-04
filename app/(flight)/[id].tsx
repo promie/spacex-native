@@ -80,34 +80,19 @@ const Page = () => {
             </View>
 
             {data?.details && (
-              <View
-                style={{
-                  marginTop: 20,
-                  alignItems: 'center',
-                  padding: 15,
-                  borderWidth: 1,
-                  borderColor: '#c4b9b9',
-                }}
-              >
-                <Text style={{ fontSize: 16 }}>{data.details}</Text>
+              <View style={styles.detailsContiner}>
+                <Text style={styles.detailsDescription}>{data.details}</Text>
               </View>
             )}
 
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                marginTop: 20,
-              }}
-            >
+            <View style={styles.iconsContainer}>
               <View>
-                <View style={{ alignItems: 'center' }}>
+                <View style={styles.iconCenter}>
                   <Ionicons name={'airplane'} size={24} color="#245086" />
                 </View>
 
-                <View style={{ marginTop: 10 }}>
-                  <Text style={{ fontWeight: 'bold' }}>Launch Date</Text>
+                <View style={styles.spacer10}>
+                  <Text style={styles.titleBold}>Launch Date</Text>
                   <Text>
                     {data?.launch_date_utc &&
                       format(data?.launch_date_utc, 'dd MMM yyyy')}
@@ -116,12 +101,12 @@ const Page = () => {
               </View>
 
               <View>
-                <View style={{ alignItems: 'center' }}>
+                <View style={styles.iconCenter}>
                   <Ionicons name={'home'} size={24} color="#245086" />
                 </View>
 
-                <View style={{ marginTop: 10 }}>
-                  <Text style={{ fontWeight: 'bold' }}>Launch Site</Text>
+                <View style={styles.spacer10}>
+                  <Text style={styles.titleBold}>Launch Site</Text>
                   <Text>{data?.launch_site.site_name}</Text>
                 </View>
               </View>
@@ -134,6 +119,25 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
+  detailsContiner: {
+    marginTop: 20,
+    alignItems: 'center',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#c4b9b9',
+  },
+  iconsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
+  },
+  iconCenter: {
+    alignItems: 'center',
+  },
+  detailsDescription: {
+    fontSize: 16,
+  },
   imageContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -149,6 +153,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontWeight: 'bold',
     color: '#245086',
+  },
+  spacer10: {
+    marginTop: 10,
+  },
+  titleBold: {
+    fontWeight: 'bold',
   },
 })
 
