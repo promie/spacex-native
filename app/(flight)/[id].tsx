@@ -62,15 +62,13 @@ const Page = () => {
     setIsFavourite(!isFavourite)
   }
 
-  console.log('data', data)
-
   return (
     <View>
       {isLoading ? (
         <LoadingIndicator />
       ) : (
         <>
-          <View>
+          <View style={styles.container}>
             <View style={styles.imageContainer}>
               <Image
                 source={{ uri: data.links.mission_patch }}
@@ -119,6 +117,9 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 70,
+  },
   detailsContiner: {
     marginTop: 20,
     alignItems: 'center',
