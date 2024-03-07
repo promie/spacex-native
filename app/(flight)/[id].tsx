@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
+import { format } from 'date-fns'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useQuery } from '@tanstack/react-query'
 import { Ionicons } from '@expo/vector-icons'
@@ -60,13 +61,14 @@ const Page = () => {
     )
     setIsFavourite(!isFavourite)
   }
+
   return (
     <View>
       {isLoading ? (
         <LoadingIndicator />
       ) : (
         <>
-          <View>
+          <View style={styles.container}>
             <View style={styles.imageContainer}>
               <Image
                 source={{ uri: data.links.mission_patch }}
@@ -75,8 +77,37 @@ const Page = () => {
               <Text style={styles.title}>{data.mission_name}</Text>
             </View>
 
-            <View>
-              <Text>{data.details}</Text>
+            {data?.details && (
+              <View style={styles.detailsContiner}>
+                <Text style={styles.detailsDescription}>{data.details}</Text>
+              </View>
+            )}
+
+            <View style={styles.iconsContainer}>
+              <View>
+                <View style={styles.iconCenter}>
+                  <Ionicons name={'airplane'} size={24} color="#245086" />
+                </View>
+
+                <View style={styles.spacer10}>
+                  <Text style={styles.titleBold}>Launch Date</Text>
+                  <Text>
+                    {data?.launch_date_utc &&
+                      format(data?.launch_date_utc, 'dd MMM yyyy')}
+                  </Text>
+                </View>
+              </View>
+
+              <View>
+                <View style={styles.iconCenter}>
+                  <Ionicons name={'home'} size={24} color="#245086" />
+                </View>
+
+                <View style={styles.spacer10}>
+                  <Text style={styles.titleBold}>Launch Site</Text>
+                  <Text>{data?.launch_site.site_name}</Text>
+                </View>
+              </View>
             </View>
           </View>
         </>
@@ -86,6 +117,28 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 70,
+  },
+  detailsContiner: {
+    marginTop: 20,
+    alignItems: 'center',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#c4b9b9',
+  },
+  iconsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
+  },
+  iconCenter: {
+    alignItems: 'center',
+  },
+  detailsDescription: {
+    fontSize: 16,
+  },
   imageContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -101,6 +154,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontWeight: 'bold',
     color: '#245086',
+  },
+  spacer10: {
+    marginTop: 10,
+  },
+  titleBold: {
+    fontWeight: 'bold',
   },
 })
 
