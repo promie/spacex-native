@@ -53,41 +53,26 @@ const Page = () => {
     setData(data.filter((item: any) => item.flight_number !== id))
   }
 
-  console.log('data', data)
-
   return (
     <GestureHandlerRootView>
       <ScrollView>
         {data &&
           data.map((item: any, index: number) => (
-            <View
-              key={index}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                borderWidth: 0.5,
-                borderColor: '#c4b9b9',
-                padding: 15,
-              }}
-            >
-              <View
-                style={{ flex: 1, display: 'flex', justifyContent: 'center' }}
-              >
+            <View key={index} style={styles.container}>
+              <View style={styles.imageContainer}>
                 <Image
                   source={{ uri: item?.links?.mission_patch_small }}
                   style={styles.preview}
                 />
               </View>
 
-              <View
-                style={{ flex: 2, display: 'flex', justifyContent: 'center' }}
-              >
-                <Text key={index} style={{ fontSize: 16, fontWeight: 'bold' }}>
+              <View style={styles.titleContainer}>
+                <Text key={index} style={styles.title}>
                   {item.mission_name}
                 </Text>
               </View>
 
-              <View style={{ display: 'flex', justifyContent: 'center' }}>
+              <View style={styles.trashContainer}>
                 <TouchableOpacity
                   onPress={() => removeFavorite(item.flight_number)}
                 >
@@ -102,6 +87,31 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderWidth: 0.5,
+    borderColor: '#c4b9b9',
+    padding: 15,
+  },
+  imageContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  titleContainer: {
+    flex: 2,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  trashContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   preview: {
     width: 40,
     height: 40,
