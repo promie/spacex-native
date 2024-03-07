@@ -50,23 +50,50 @@ const Page = () => {
 
   const removeFavorite = async (id: number) => {
     await AsyncStorage.removeItem(`favourite-${id}`)
-    setData(data.filter((item: any) => item.id !== id))
+    setData(data.filter((item: any) => item.flight_number !== id))
   }
+
+  console.log('data', data)
 
   return (
     <GestureHandlerRootView>
       <ScrollView>
         {data &&
           data.map((item: any, index: number) => (
-            <View key={index}>
-              <Image
-                source={{ uri: item?.links?.mission_patch_small }}
-                style={styles.preview}
-              />
-              <Text key={index}>{item.mission_name}</Text>
-              <TouchableOpacity onPress={() => removeFavorite(item.id)}>
-                <Ionicons name="trash" size={18} color="#c10505" />
-              </TouchableOpacity>
+            <View
+              key={index}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                borderWidth: 0.5,
+                borderColor: '#c4b9b9',
+                padding: 15,
+              }}
+            >
+              <View
+                style={{ flex: 1, display: 'flex', justifyContent: 'center' }}
+              >
+                <Image
+                  source={{ uri: item?.links?.mission_patch_small }}
+                  style={styles.preview}
+                />
+              </View>
+
+              <View
+                style={{ flex: 2, display: 'flex', justifyContent: 'center' }}
+              >
+                <Text key={index} style={{ fontSize: 16, fontWeight: 'bold' }}>
+                  {item.mission_name}
+                </Text>
+              </View>
+
+              <View style={{ display: 'flex', justifyContent: 'center' }}>
+                <TouchableOpacity
+                  onPress={() => removeFavorite(item.flight_number)}
+                >
+                  <Ionicons name="trash" size={18} color="#c10505" />
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
       </ScrollView>
@@ -76,8 +103,8 @@ const Page = () => {
 
 const styles = StyleSheet.create({
   preview: {
-    width: 100,
-    height: 100,
+    width: 40,
+    height: 40,
   },
 })
 export default Page
