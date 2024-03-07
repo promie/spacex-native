@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useQueries } from '@tanstack/react-query'
 import { getFlightDetails } from '@api/launches'
@@ -43,13 +43,28 @@ const Page = () => {
     }
   }, [allFinished])
 
+  console.log('data', data)
+
   return (
-    <View>
+    <ScrollView>
       {data &&
-        data.map((item: any) => (
-          <Text key={item.flight_number}>{item.mission_name}</Text>
+        data.map((item: any, index: number) => (
+          <View key={index}>
+            <Image
+              source={{ uri: data?.links?.mission_patch_small }}
+              style={styles.preview}
+            />
+            <Text key={index}>{item.mission_name}</Text>
+          </View>
         ))}
-    </View>
+    </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  preview: {
+    width: 100,
+    height: 100,
+  },
+})
 export default Page
