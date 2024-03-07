@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useQueries } from '@tanstack/react-query'
+import { Ionicons } from '@expo/vector-icons'
+import {
+  GestureHandlerRootView,
+  TouchableOpacity,
+} from 'react-native-gesture-handler'
 import { getFlightDetails } from '@api/launches'
 
 const Page = () => {
@@ -43,21 +48,29 @@ const Page = () => {
     }
   }, [allFinished])
 
-  console.log('data', data)
+  const removeFavorite = async (id: number) => {
+    await AsyncStorage.removeItem(`favourite-${id}`)
+    setData(data.filter((item: any) => item.id !== id))
+  }
 
   return (
-    <ScrollView>
-      {data &&
-        data.map((item: any, index: number) => (
-          <View key={index}>
-            <Image
-              source={{ uri: data?.links?.mission_patch_small }}
-              style={styles.preview}
-            />
-            <Text key={index}>{item.mission_name}</Text>
-          </View>
-        ))}
-    </ScrollView>
+    <GestureHandlerRootView>
+      <ScrollView>
+        {data &&
+          data.map((item: any, index: number) => (
+            <View key={index}>
+              <Image
+                source={{ uri: item?.links?.mission_patch_small }}
+                style={styles.preview}
+              />
+              <Text key={index}>{item.mission_name}</Text>
+              <TouchableOpacity onPress={() => removeFavorite(item.id)}>
+                <Ionicons name="trash" size={18} color="#c10505" />
+              </TouchableOpacity>
+            </View>
+          ))}
+      </ScrollView>
+    </GestureHandlerRootView>
   )
 }
 
